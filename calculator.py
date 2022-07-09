@@ -9,6 +9,28 @@ root.geometry()
 def testFun(num):
 	display.insert(tk.END, num)
 	
+	
+
+a = []
+s = []
+
+def addFun():	
+	a.append(display.get())
+	display.delete(0,'end')
+	if len(a) < 1:
+		display.insert(0, a[0])
+		s.append(a[0])
+	if len(a) >= 2 and len(a) < 3:
+		s.append(int(a[-2]) + int(a[-1]))
+	if len(a) >= 3:
+		s.append(int(a[-1]) + int(s[-1]))
+	print(a,s)
+
+
+def equalFun():
+	display.delete(0,'end')
+	display.insert(0,s[-1])
+
 display = tk.Entry(root)
 display.grid(columnspan = 3, column = 1, row = 0)
 
@@ -44,6 +66,10 @@ num9key.grid(column = 3, row = 4)
 num0key = tk.Button(root, text = '0', command = lambda:testFun(0))
 num0key.grid(column = 2, row = 5)
 
-# Operator keys
+testkey = tk.Button(root, text='+', command = addFun)
+testkey.grid(column = 1, row = 5)
+
+equalkey = tk.Button(root, text = '=', command = equalFun)
+equalkey.grid(column = 1, row = 6)
 
 root.mainloop()
