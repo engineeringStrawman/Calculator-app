@@ -9,27 +9,23 @@ root.geometry()
 def testFun(num):
 	display.insert(tk.END, num)
 	
-	
+def deleteKey():
+	display.delete(0,tk.END)
 
 a = []
 s = []
 
+operation_symbol = '+'
+
 def addFun():	
 	a.append(display.get())
 	display.delete(0,'end')
-	if len(a) < 1:
-		display.insert(0, a[0])
-		s.append(a[0])
-	if len(a) >= 2 and len(a) < 3:
-		s.append(int(a[-2]) + int(a[-1]))
-	if len(a) >= 3:
-		s.append(int(a[-1]) + int(s[-1]))
-	print(a,s)
-
+	operationsymbol = '+'
 
 def equalFun():
-	display.delete(0,'end')
-	display.insert(0,s[-1])
+	c = display.get()
+	s.append(int(a[-1])+int(c))
+	display.insert(0, s[-1])
 
 display = tk.Entry(root)
 display.grid(columnspan = 3, column = 1, row = 0)
@@ -54,7 +50,7 @@ num5key.grid(column = 2, row = 3)
 num6key = tk.Button(root, text = '6', command = lambda:testFun(6))
 num6key.grid(column = 3, row = 3)
 
-num7key = tk.Button(root, text = '6', command = lambda:testFun(7))
+num7key = tk.Button(root, text = '7', command = lambda:testFun(7))
 num7key.grid(column = 1, row = 4)
 
 num8key = tk.Button(root, text = '8', command = lambda:testFun(8))
@@ -69,7 +65,14 @@ num0key.grid(column = 2, row = 5)
 testkey = tk.Button(root, text='+', command = addFun)
 testkey.grid(column = 1, row = 5)
 
+subtractkey = tk.Button(root, text = '-', command = addFun)
+subtractkey.grid(column = 3, row = 5)
+
+deletekey = tk.Button(root, text = 'C', command = deleteKey)
+deletekey.grid(columnspan = 3, column = 1, row = 7)
+
+
 equalkey = tk.Button(root, text = '=', command = equalFun)
-equalkey.grid(column = 1, row = 6)
+equalkey.grid(column = 1, columnspan = 3, row = 6)
 
 root.mainloop()
